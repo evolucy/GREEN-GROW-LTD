@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | GREEN GROW PRIVATE LIMITED</title>
+    <title>GREEN GROW PRIVATE LIMITED | Join, Earn, Grow</title>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     
     <!-- Tailwind CSS -->
@@ -48,329 +48,477 @@
             background: linear-gradient(135deg, rgba(40,167,69,0.1) 0%, rgba(255,255,255,0.05) 100%);
         }
         
-        .form-step {
-            display: none;
+        .reward-card:hover .reward-details {
+            transform: rotateY(180deg);
         }
         
-        .form-step.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
+        .reward-card .reward-details {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
         }
         
-        .progress-step {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            position: relative;
-        }
-        
-        .progress-step.completed {
-            background-color: #28a745;
-            color: white;
-        }
-        
-        .progress-step.active {
-            background-color: #d4af37;
-            color: white;
-        }
-        
-        .progress-step.pending {
-            background-color: #e5e7eb;
-            color: #6b7280;
-        }
-        
-        .progress-connector {
-            height: 2px;
-            flex-grow: 1;
-            background-color: #e5e7eb;
-        }
-        
-        .progress-connector.completed {
-            background-color: #28a745;
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
-<body class="font-sans bg-gray-50 dark:bg-dark text-gray-800 dark:text-gray-200 transition-colors duration-300 min-h-screen flex flex-col">
+<body class="font-sans bg-gray-50 dark:bg-dark text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Theme Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg">
+            <i id="themeIcon" data-feather="sun"></i>
+        </button>
+    </div>
+
     <!-- Navigation -->
-    <nav class="bg-white dark:bg-gray-900 shadow-sm">
+    <nav class="fixed w-full bg-white dark:bg-gray-900 bg-opacity-90 dark:bg-opacity-90 shadow-sm z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href="index.html" class="flex items-center">
+                    <a href="#" class="flex items-center">
                         <span class="text-primary text-2xl font-bold">GREEN</span>
                         <span class="text-secondary text-2xl font-bold">GROW</span>
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="hover:text-primary transition">Home</a>
+                    <a href="#" class="text-primary font-medium">Home</a>
                     <a href="how-it-works.html" class="hover:text-primary transition">How It Works</a>
                     <a href="rewards.html" class="hover:text-primary transition">Rewards</a>
                     <a href="leaderboard.html" class="hover:text-primary transition">Leaderboard</a>
                     <a href="contact.html" class="hover:text-primary transition">Contact</a>
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center space-x-4">
                     <a href="login.html" class="px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">Login</a>
+                    <a href="signup.html" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-green-600 transition">Join Now</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuButton" class="p-2">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-gray-900 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" class="block px-3 py-2 rounded-md text-primary font-medium">Home</a>
+                <a href="how-it-works.html" class="block px-3 py-2 rounded-md hover:text-primary transition">How It Works</a>
+                <a href="rewards.html" class="block px-3 py-2 rounded-md hover:text-primary transition">Rewards</a>
+                <a href="leaderboard.html" class="block px-3 py-2 rounded-md hover:text-primary transition">Leaderboard</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md hover:text-primary transition">Contact</a>
+                <div class="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
+                    <a href="login.html" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">Login</a>
+                    <a href="signup.html" class="block px-3 py-2 bg-primary text-white rounded-md hover:bg-green-600 transition">Join Now</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="flex-grow gradient-bg">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden" data-aos="fade-up">
-                <div class="grid md:grid-cols-2">
-                    <!-- Left Side - Image -->
-                    <div class="hidden md:block bg-gradient-to-br from-primary to-green-600 p-12 flex flex-col justify-center text-white">
-                        <h2 class="text-3xl font-bold mb-4">Join Our Community</h2>
-                        <p class="mb-8">Become part of a transparent and rewarding system where your efforts are truly valued.</p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <i data-feather="check-circle" class="mr-3 w-5 h-5"></i>
-                                <span>₹1,000 instant commission per referral</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-feather="check-circle" class="mr-3 w-5 h-5"></i>
-                                <span>Monthly rewards for top performers</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-feather="check-circle" class="mr-3 w-5 h-5"></i>
-                                <span>Global pool payouts every month</span>
-                            </li>
-                        </ul>
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 md:pt-32 md:pb-24 gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-gradient-to-b from-green-50 dark:from-gray-900 to-transparent"></div>
+            <div class="absolute inset-0 opacity-10 dark:opacity-5">
+                <div class="absolute top-0 left-0 w-64 h-64 rounded-full bg-primary blur-3xl opacity-20"></div>
+                <div class="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-secondary blur-3xl opacity-20"></div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                        <span class="text-primary">GREEN</span>
+                        <span class="text-secondary">GROW</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">PRIVATE LIMITED</p>
+                    <p class="text-xl md:text-2xl font-medium mb-8">Join, Earn, Grow — Transparent monthly reward system.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="signup.html" class="px-6 py-3 bg-primary hover:bg-green-600 text-white rounded-md text-center font-medium transition">Join Now</a>
+                        <a href="how-it-works.html" class="px-6 py-3 border border-primary text-primary hover:bg-primary hover:text-white rounded-md text-center font-medium transition">Learn More</a>
                     </div>
-                    
-                    <!-- Right Side - Form -->
-                    <div class="p-8">
-                        <div class="text-center mb-8">
-                            <h2 class="text-2xl font-bold mb-2">Create Your Account</h2>
-                            <p class="text-gray-600 dark:text-gray-300">Join with a one-time payment of ₹10,000</p>
+                </div>
+                <div data-aos="fade-left" class="relative">
+                    <div class="glass-card p-6 rounded-xl shadow-xl floating">
+                        <div class="text-center mb-6">
+                            <h3 class="text-xl font-bold text-primary mb-2">Live Dashboard</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Real-time statistics</p>
                         </div>
                         
-                        <!-- Progress Steps -->
-                        <div class="flex items-center mb-8">
-                            <div class="progress-step completed" id="step1">
-                                <span>1</span>
-                                <div class="absolute -bottom-6 text-xs font-medium text-center w-full">Account</div>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="glass-card p-4 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-gray-600 dark:text-gray-300">Global Pool</span>
+                                    <i data-feather="dollar-sign" class="text-primary"></i>
+                                </div>
+                                <div class="text-2xl font-bold text-primary" id="poolCounter">₹0</div>
                             </div>
-                            <div class="progress-connector completed" id="connector1"></div>
-                            <div class="progress-step active" id="step2">
-                                <span>2</span>
-                                <div class="absolute -bottom-6 text-xs font-medium text-center w-full">Personal</div>
-                            </div>
-                            <div class="progress-connector" id="connector2"></div>
-                            <div class="progress-step pending" id="step3">
-                                <span>3</span>
-                                <div class="absolute -bottom-6 text-xs font-medium text-center w-full">Referral</div>
-                            </div>
-                            <div class="progress-connector" id="connector3"></div>
-                            <div class="progress-step pending" id="step4">
-                                <span>4</span>
-                                <div class="absolute -bottom-6 text-xs font-medium text-center w-full">Payment</div>
-                            </div>
-                            <div class="progress-connector" id="connector4"></div>
-                            <div class="progress-step pending" id="step5">
-                                <span>5</span>
-                                <div class="absolute -bottom-6 text-xs font-medium text-center w-full">Complete</div>
+                            <div class="glass-card p-4 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-gray-600 dark:text-gray-300">Total Points</span>
+                                    <i data-feather="award" class="text-secondary"></i>
+                                </div>
+                                <div class="text-2xl font-bold text-secondary" id="pointsCounter">0</div>
                             </div>
                         </div>
                         
-                        <!-- Multi-step Form -->
-                        <form id="signupForm" class="space-y-6">
-                            <!-- Step 1 - Account -->
-                            <div class="form-step active" id="formStep1">
-                                <div class="space-y-4">
-                                    <div>
-                                        <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
-                                        <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
+                        <div class="glass-card p-4 rounded-lg mb-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-gray-600 dark:text-gray-300">Monthly Target</span>
+                                <span class="text-sm font-medium">2000 recruiters</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-primary h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-card p-4 rounded-lg">
+                            <h4 class="text-sm font-medium mb-3">Top Performers</h4>
+                            <div class="space-y-3 max-h-40 overflow-y-auto pr-2">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-xs font-bold text-white">1</div>
+                                        <span class="text-sm">John D.</span>
                                     </div>
-                                    <div>
-                                        <label for="password" class="block text-sm font-medium mb-1">Password</label>
-                                        <input type="password" id="password" name="password" required minlength="8" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
-                                        <p class="text-xs text-gray-500 mt-1">Minimum 8 characters</p>
-                                    </div>
-                                    <div>
-                                        <label for="confirmPassword" class="block text-sm font-medium mb-1">Confirm Password</label>
-                                        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
-                                    </div>
+                                    <span class="text-sm font-medium">1420 pts</span>
                                 </div>
-                                <div class="mt-6">
-                                    <button type="button" onclick="nextStep(2)" class="w-full px-4 py-2 bg-primary hover:bg-green-600 text-white rounded-md">Next</button>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-6 h-6 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-xs font-bold">2</div>
+                                        <span class="text-sm">Sarah M.</span>
+                                    </div>
+                                    <span class="text-sm font-medium">1250 pts</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-6 h-6 rounded-full bg-amber-600 flex items-center justify-center text-xs font-bold text-white">3</div>
+                                        <span class="text-sm">Robert P.</span>
+                                    </div>
+                                    <span class="text-sm font-medium">980 pts</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xs font-bold">4</div>
+                                        <span class="text-sm">Emily T.</span>
+                                    </div>
+                                    <span class="text-sm font-medium">870 pts</span>
                                 </div>
                             </div>
-                            
-                            <!-- Step 2 - Personal -->
-                            <div class="form-step" id="formStep2">
-                                <div class="space-y-4">
-                                    <div>
-                                        <label for="fullName" class="block text-sm font-medium mb-1">Full Name</label>
-                                        <input type="text" id="fullName" name="fullName" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
-                                    </div>
-                                    <div>
-                                        <label for="phone" class="block text-sm font-medium mb-1">Phone Number</label>
-                                        <input type="tel" id="phone" name="phone" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
-                                    </div>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label for="country" class="block text-sm font-medium mb-1">Country</label>
-                                            <select id="country" name="country" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
-                                                <option value="" disabled selected>Select Country</option>
-                                                <option value="IN">India</option>
-                                                <option value="US">United States</option>
-                                                <option value="UK">United Kingdom</option>
-                                                <!-- More countries -->
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label for="city" class="block text-sm font-medium mb-1">City</label>
-                                            <input type="text" id="city" name="city" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="zipCode" class="block text-sm font-medium mb-1">ZIP Code</label>
-                                        <input type="text" id="zipCode" name="zipCode" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
-                                    </div>
-                                </div>
-                                <div class="mt-6 flex justify-between">
-                                    <button type="button" onclick="prevStep(1)" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">Back</button>
-                                    <button type="button" onclick="nextStep(3)" class="px-4 py-2 bg-primary hover:bg-green-600 text-white rounded-md">Next</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Step 3 - Referral -->
-                            <div class="form-step" id="formStep3">
-                                <div class="space-y-4">
-                                    <div>
-                                        <label for="referralCode" class="block text-sm font-medium mb-1">Referral Code (Optional)</label>
-                                        <input type="text" id="referralCode" name="referralCode" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
-                                        <p class="text-xs text-gray-500 mt-1">If you were referred by someone, enter their code here</p>
-                                    </div>
-                                    <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-md">
-                                        <p class="text-sm text-gray-600 dark:text-gray-300">By joining with a referral code:</p>
-                                        <ul class="text-sm text-gray-600 dark:text-gray-300 list-disc pl-5 mt-2">
-                                            <li>Your sponsor earns ₹1,000 instantly</li>
-                                            <li>You get access to their support network</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="mt-6 flex justify-between">
-                                    <button type="button" onclick="prevStep(2)" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">Back</button>
-                                    <button type="button" onclick="nextStep(4)" class="px-4 py-2 bg-primary hover:bg-green-600 text-white rounded-md">Next</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Step 4 - Payment -->
-                            <div class="form-step" id="formStep4">
-                                <div class="space-y-4">
-                                    <h3 class="text-lg font-medium">Payment Details</h3>
-                                    <p class="text-sm text-gray-600 dark:text-gray-300">One-time joining fee: <span class="font-bold text-primary">₹10,000</span></p>
-                                    
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div class="col-span-2">
-                                            <label for="cardName" class="block text-sm font-medium mb-1">Name on Card</label>
-                                            <input type="text" id="cardName" name="cardName" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700">
-                                        </div>
-                                        <div class="col-span-2">
-                                            <label for="cardNumber" class="block text-sm font-medium mb-1">Card Number</label>
-                                            <input type="text" id="cardNumber" name="cardNumber" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700" placeholder="1234 5678 9012 3456">
-                                        </div>
-                                        <div>
-                                            <label for="expiryDate" class="block text-sm font-medium mb-1">Expiry Date</label>
-                                            <input type="text" id="expiryDate" name="expiryDate" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700" placeholder="MM/YY">
-                                        </div>
-                                        <div>
-                                            <label for="cvv" class="block text-sm font-medium mb-1">CVV</label>
-                                            <input type="text" id="cvv" name="cvv" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary focus:border-primary dark:bg-gray-700" placeholder="123">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-md">
-                                        <h4 class="font-medium mb-2">Payment Breakdown</h4>
-                                        <div class="text-sm space-y-2">
-                                            <div class="flex justify-between">
-                                                <span>Products</span>
-                                                <span>₹3,000</span>
-                                            </div>
-                                            <div class="flex justify-between">
-                                                <span>Sponsor Commission</span>
-                                                <span>₹1,000</span>
-                                            </div>
-                                            <div class="flex justify-between">
-                                                <span>Reserve Fund</span>
-                                                <span>₹3,000</span>
-                                            </div>
-                                            <div class="flex justify-between">
-                                                <span>Rewards Fund</span>
-                                                <span>₹500</span>
-                                            </div>
-                                            <div class="flex justify-between">
-                                                <span>Global Pool</span>
-                                                <span>₹2,500</span>
-                                            </div>
-                                            <div class="border-t border-gray-300 dark:border-gray-600 mt-2 pt-2 font-medium">
-                                                <div class="flex justify-between">
-                                                    <span>Total</span>
-                                                    <span>₹10,000</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-6 flex justify-between">
-                                    <button type="button" onclick="prevStep(3)" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">Back</button>
-                                    <button type="button" onclick="nextStep(5)" class="px-4 py-2 bg-primary hover:bg-green-600 text-white rounded-md">Proceed to Payment</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Step 5 - Complete -->
-                            <div class="form-step" id="formStep5">
-                                <div class="text-center py-8">
-                                    <div class="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <i data-feather="check" class="w-10 h-10 text-primary"></i>
-                                    </div>
-                                    <h3 class="text-2xl font-bold mb-2">Registration Complete!</h3>
-                                    <p class="text-gray-600 dark:text-gray-300 mb-6">Welcome to GREEN GROW PRIVATE LIMITED. Your account has been successfully created.</p>
-                                    
-                                    <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-md mb-6">
-                                        <h4 class="font-medium mb-3">Your Referral Code</h4>
-                                        <div class="bg-white dark:bg-gray-800 p-3 rounded-md text-center">
-                                            <p class="text-primary font-mono text-lg">GGPL<span id="generatedCode">XK8H2J</span></p>
-                                        </div>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Share this code to earn ₹1,000 per referral</p>
-                                    </div>
-                                    
-                                    <div class="flex justify-center gap-4">
-                                        <a href="dashboard.html" class="px-4 py-2 bg-primary hover:bg-green-600 text-white rounded-md">Go to Dashboard</a>
-                                        <a href="how-it-works.html" class="px-4 py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-md">Learn How It Works</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
+
+    <!-- Rewards Preview -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">Monthly Rewards</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Top achievers receive exclusive rewards every month based on their performance.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6" data-aos="fade-up" data-aos-delay="100">
+                <!-- Car Reward -->
+                <div class="reward-card h-64 perspective">
+                    <div class="reward-details relative w-full h-full transition-transform duration-500">
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-xl shadow-md p-6 flex flex-col items-center justify-center">
+                            <div class="w-20 h-20 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i data-feather="award" class="text-primary w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-center mb-2">1st Prize</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 text-center">Car + ₹50,000</p>
+                        </div>
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-primary to-green-600 rounded-xl shadow-md p-6 flex flex-col items-center justify-center rotate-y-180">
+                            <img src="http://static.photos/automotive/640x360/1" alt="Car" class="w-32 h-24 object-cover rounded-lg mb-3">
+                            <h3 class="text-xl font-bold text-white text-center mb-1">Luxury Car</h3>
+                            <p class="text-sm text-white text-opacity-80 text-center">For top performer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bike Reward -->
+                <div class="reward-card h-64 perspective">
+                    <div class="reward-details relative w-full h-full transition-transform duration-500">
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-xl shadow-md p-6 flex flex-col items-center justify-center">
+                            <div class="w-20 h-20 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i data-feather="award" class="text-secondary w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-center mb-2">2nd Prize</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 text-center">Bike + ₹40,000</p>
+                        </div>
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-secondary to-amber-600 rounded-xl shadow-md p-6 flex flex-col items-center justify-center rotate-y-180">
+                            <img src="http://static.photos/automotive/640x360/2" alt="Bike" class="w-32 h-24 object-cover rounded-lg mb-3">
+                            <h3 class="text-xl font-bold text-white text-center mb-1">Premium Bike</h3>
+                            <p class="text-sm text-white text-opacity-80 text-center">For 2nd position</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gold Reward -->
+                <div class="reward-card h-64 perspective">
+                    <div class="reward-details relative w-full h-full transition-transform duration-500">
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-xl shadow-md p-6 flex flex-col items-center justify-center">
+                            <div class="w-20 h-20 bg-amber-500 bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i data-feather="award" class="text-amber-500 w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-center mb-2">3rd Prize</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 text-center">Gold + ₹30,000</p>
+                        </div>
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl shadow-md p-6 flex flex-col items-center justify-center rotate-y-180">
+                            <img src="http://static.photos/minimal/640x360/1" alt="Gold" class="w-32 h-24 object-cover rounded-lg mb-3">
+                            <h3 class="text-xl font-bold text-white text-center mb-1">Gold Bar</h3>
+                            <p class="text-sm text-white text-opacity-80 text-center">For 3rd position</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- iPhone Reward -->
+                <div class="reward-card h-64 perspective">
+                    <div class="reward-details relative w-full h-full transition-transform duration-500">
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-xl shadow-md p-6 flex flex-col items-center justify-center">
+                            <div class="w-20 h-20 bg-blue-500 bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i data-feather="award" class="text-blue-500 w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-center mb-2">4th Prize</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 text-center">iPhone + ₹20,000</p>
+                        </div>
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-md p-6 flex flex-col items-center justify-center rotate-y-180">
+                            <img src="http://static.photos/technology/640x360/1" alt="iPhone" class="w-32 h-24 object-cover rounded-lg mb-3">
+                            <h3 class="text-xl font-bold text-white text-center mb-1">Latest iPhone</h3>
+                            <p class="text-sm text-white text-opacity-80 text-center">For 4th position</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Trip Reward -->
+                <div class="reward-card h-64 perspective">
+                    <div class="reward-details relative w-full h-full transition-transform duration-500">
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-xl shadow-md p-6 flex flex-col items-center justify-center">
+                            <div class="w-20 h-20 bg-red-500 bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i data-feather="award" class="text-red-500 w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-center mb-2">5th Prize</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 text-center">Foreign Trip + ₹10,000</p>
+                        </div>
+                        <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-red-500 to-red-600 rounded-xl shadow-md p-6 flex flex-col items-center justify-center rotate-y-180">
+                            <img src="http://static.photos/travel/640x360/1" alt="Trip" class="w-32 h-24 object-cover rounded-lg mb-3">
+                            <h3 class="text-xl font-bold text-white text-center mb-1">Exotic Trip</h3>
+                            <p class="text-sm text-white text-opacity-80 text-center">For 5th position</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12" data-aos="fade-up">
+                <a href="rewards.html" class="px-6 py-3 border border-primary text-primary hover:bg-primary hover:text-white rounded-md text-center font-medium transition inline-flex items-center">
+                    View All Rewards
+                    <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">How It Works</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Simple steps to start earning with our transparent system.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i data-feather="user-plus" class="text-primary w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">Step 1: Join</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-center">Register with a one-time payment of ₹10,000 to become a member.</p>
+                </div>
+                
+                <div class="glass-card p-8 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i data-feather="users" class="text-secondary w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">Step 2: Refer</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-center">Earn ₹1,000 for each direct referral plus 10 points per referral.</p>
+                </div>
+                
+                <div class="glass-card p-8 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-green-600 bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i data-feather="award" class="text-green-600 w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">Step 3: Earn</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-center">Receive monthly payouts from the global pool based on your points.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12" data-aos="fade-up">
+                <a href="how-it-works.html" class="px-6 py-3 bg-primary hover:bg-green-600 text-white rounded-md text-center font-medium transition inline-flex items-center">
+                    Learn More About The System
+                    <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">Success Stories</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Hear from our top performers who achieved their dreams.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <img src="http://static.photos/people/200x200/1" alt="John" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">John D.</h4>
+                            <p class="text-sm text-gray-500">Top Performer, June 2023</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">"I never thought I could win a car just by referring friends. The system is transparent and payments are always on time."</p>
+                    <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <img src="http://static.photos/people/200x200/2" alt="Sarah" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">Sarah M.</h4>
+                            <p class="text-sm text-gray-500">Top Performer, May 2023</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">"Within 3 months I earned over ₹2 lakhs from referrals and pool distributions. The rewards are real and life-changing."</p>
+                    <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-4">
+                        <img src="http://static.photos/people/200x200/3" alt="Robert" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">Robert P.</h4>
+                            <p class="text-sm text-gray-500">Top Performer, April 2023</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">"The monthly leaderboard motivates me to perform better. I've made great connections and built a strong network through this."</p>
+                    <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4 fill-current"></i>
+                            <i data-feather="star" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-gradient-to-b from-primary to-transparent opacity-10"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+            <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Life?</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">Join thousands of others who are already benefiting from our transparent and rewarding system.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="signup.html" class="px-8 py-4 bg-primary hover:bg-green-600 text-white rounded-md text-center font-medium text-lg transition">Join Now</a>
+                <a href="contact.html" class="px-8 py-4 border border-primary text-primary hover:bg-primary hover:text-white rounded-md text-center font-medium text-lg transition">Contact Us</a>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-8">
+    <footer class="bg-gray-900 text-gray-300 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <div class="flex items-center justify-center mb-4">
-                    <span class="text-primary text-xl font-bold">GREEN</span>
-                    <span class="text-secondary text-xl font-bold">GROW</span>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-primary text-2xl font-bold">GREEN</span>
+                        <span class="text-secondary text-2xl font-bold">GROW</span>
+                    </div>
+                    <p class="mb-4">PRIVATE LIMITED</p>
+                    <p class="text-sm">Transparent monthly reward system for those who want to achieve financial freedom.</p>
                 </div>
-                <p class="text-sm mb-4">PRIVATE LIMITED</p>
-                <p class="text-xs text-gray-500">© 2023 GREEN GROW PRIVATE LIMITED. All rights reserved.</p>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary transition">Home</a></li>
+                        <li><a href="how-it-works.html" class="hover:text-primary transition">How It Works</a></li>
+                        <li><a href="rewards.html" class="hover:text-primary transition">Rewards</a></li>
+                        <li><a href="leaderboard.html" class="hover:text-primary transition">Leaderboard</a></li>
+                        <li><a href="contact.html" class="hover:text-primary transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Refund Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white">Contact Us</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i data-feather="mail" class="mr-3 w-5 h-5 text-primary"></i>
+                            <span>contact@greengrow.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="phone" class="mr-3 w-5 h-5 text-primary"></i>
+                            <span>+91 9876543210</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="map-pin" class="mr-3 w-5 h-5 text-primary"></i>
+                            <span>123 Business Street, Financial District, Mumbai, India</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm mb-4 md:mb-0">© 2023 GREEN GROW PRIVATE LIMITED. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-primary transition"><i data-feather="facebook"></i></a>
+                    <a href="#" class="hover:text-primary transition"><i data-feather="twitter"></i></a>
+                    <a href="#" class="hover:text-primary transition"><i data-feather="instagram"></i></a>
+                    <a href="#" class="hover:text-primary transition"><i data-feather="linkedin"></i></a>
+                </div>
             </div>
         </div>
     </footer>
@@ -379,88 +527,105 @@
         // Initialize AOS
         AOS.init({
             duration: 800,
+            easing: 'ease-in-out',
             once: true
         });
         
         // Initialize Feather Icons
         feather.replace();
         
-        // Form Navigation
-        function nextStep(step) {
-            // Validate current step before proceeding
-            if (step === 5) {
-                // For demo purposes, we'll just show the success screen
-                // In a real app, you would process the payment here
-                document.getElementById('formStep4').classList.remove('active');
-                document.getElementById('formStep5').classList.add('active');
-                
-                // Update progress steps
-                document.getElementById('step4').classList.remove('active');
-                document.getElementById('step4').classList.add('completed');
-                document.getElementById('connector4').classList.add('completed');
-                document.getElementById('step5').classList.remove('pending');
-                document.getElementById('step5').classList.add('active');
-                
-                return;
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or use preferred color scheme
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        html.classList.add(currentTheme);
+        
+        // Set initial icon
+        if (currentTheme === 'dark') {
+            feather.replace();
+            themeIcon.setAttribute('data-feather', 'sun');
+        } else {
+            feather.replace();
+            themeIcon.setAttribute('data-feather', 'moon');
+        }
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.setAttribute('data-feather', 'moon');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.setAttribute('data-feather', 'sun');
             }
+            feather.replace();
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            feather.replace();
+        });
+        
+        // Counter Animation
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
             
-            // Hide current step
-            document.getElementById(`formStep${step-1}`).classList.remove('active');
-            
-            // Show next step
-            document.getElementById(`formStep${step}`).classList.add('active');
-            
-            // Update progress steps
-            document.getElementById(`step${step-1}`).classList.remove('active');
-            document.getElementById(`step${step-1}`).classList.add('completed');
-            document.getElementById(`connector${step-1}`).classList.add('completed');
-            document.getElementById(`step${step}`).classList.remove('pending');
-            document.getElementById(`step${step}`).classList.add('active');
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    clearInterval(timer);
+                    current = target;
+                }
+                
+                if (element.id === 'poolCounter') {
+                    element.textContent = `₹${Math.floor(current).toLocaleString()}`;
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
         }
         
-        function prevStep(step) {
-            // Hide current step
-            document.getElementById(`formStep${step+1}`).classList.remove('active');
-            
-            // Show previous step
-            document.getElementById(`formStep${step}`).classList.add('active');
-            
-            // Update progress steps
-            document.getElementById(`step${step+1}`).classList.remove('active');
-            document.getElementById(`step${step+1}`).classList.add('pending');
-            document.getElementById(`connector${step}`).classList.remove('completed');
-            document.getElementById(`step${step}`).classList.remove('completed');
-            document.getElementById(`step${step}`).classList.add('active');
-        }
+        // Start counters when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'poolCounter') {
+                        animateCounter(entry.target, 4250000);
+                    } else if (entry.target.id === 'pointsCounter') {
+                        animateCounter(entry.target, 12500);
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
         
-        // Generate a random referral code
-        function generateReferralCode() {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-            let code = '';
-            for (let i = 0; i < 5; i++) {
-                code += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            document.getElementById('generatedCode').textContent = code;
-        }
+        observer.observe(document.getElementById('poolCounter'));
+        observer.observe(document.getElementById('pointsCounter'));
         
-        // Generate code when page loads (for demo)
-        window.addEventListener('DOMContentLoaded', generateReferralCode);
+        // Reward card hover effect
+        document.querySelectorAll('.reward-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelector('.reward-details').style.transform = 'rotateY(180deg)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('.reward-details').style.transform = 'rotateY(0deg)';
+            });
+        });
     </script>
 </body>
 </html>
 
 
-Would you like me to continue with additional pages (how-it-works.html, rewards.html, dashboard.html, etc.)? Each page will maintain the same premium design aesthetic with the green/gold color scheme, glassmorphism effects, and smooth animations while providing the specific functionality mentioned in your requirements.
-
-The design includes:
-1. Responsive layouts for all device sizes
-2. Dark/light mode toggle
-3. Animated counters for live statistics
-4. Interactive form with step-by-step progression
-5. Flip animations for reward cards
-6. Clean, professional typography
-7. Secure payment flow with breakdown
-8. Referral code generation
-9. Progress indicators for multi-step forms
-
-Let me know which page you'd like to see next and I'll provide the complete HTML code for it.
+Here's the continuation with the signup.html page:
