@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Global Pool - Green Grow Platform</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="description" content="Track the Global Pool in real-time. See transparent distributions, member contributions, and upcoming payouts in the Green Grow Platform community." />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fgreengrow2715back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-white border-b border-border sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L20 10H28L22 16L24 24L16 20L8 24L10 16L4 10H12L16 2Z"/>
+                            <circle cx="16" cy="16" r="3" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-bold text-text-primary">Green Grow</h1>
+                        <p class="text-xs text-text-secondary">Platform</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Home</a>
+                        <a href="member_dashboard.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Dashboard</a>
+                        <a href="rewards_center.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Rewards</a>
+                        <a href="global_pool.html" class="text-primary font-semibold px-3 py-2 rounded-md text-sm">Global Pool</a>
+                        <a href="admin_dashboard.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Admin</a>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="signup_flow.html" class="btn-primary">Join Now</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-text-secondary hover:text-primary focus:outline-none focus:text-primary" onclick="toggleMobileMenu()">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-border">
+                    <a href="homepage.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Home</a>
+                    <a href="member_dashboard.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Dashboard</a>
+                    <a href="rewards_center.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Rewards</a>
+                    <a href="global_pool.html" class="text-primary font-semibold block px-3 py-2 rounded-md text-base">Global Pool</a>
+                    <a href="admin_dashboard.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Admin</a>
+                    <a href="signup_flow.html" class="btn-primary block text-center mt-4">Join Now</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Pool Tracker -->
+    <section class="relative bg-gradient-to-br from-primary-50 to-secondary-50 overflow-hidden py-12">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 1000 1000">
+                <defs>
+                    <pattern id="pool-pattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                        <circle cx="25" cy="25" r="1" fill="currentColor" class="text-primary">
+                            <animate attributeName="r" values="1;3;1" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="25" cy="25" r="8" fill="none" stroke="currentColor" stroke-width="0.5" class="text-primary opacity-20">
+                            <animate attributeName="r" values="8;12;8" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#pool-pattern)"/>
+            </svg>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+                    <span class="text-gradient-primary">Global Pool</span>
+                </h1>
+                <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+                    Transparent community earnings with real-time tracking and fair distribution
+                </p>
+            </div>
+
+            <!-- Real-time Pool Tracker -->
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-floating mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Current Pool Total -->
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-primary mb-2" id="pool-total">₹15,67,890</div>
+                        <div class="text-text-secondary font-medium">Current Pool Total</div>
+                        <div class="text-sm text-success mt-1">↗ +₹45,230 today</div>
+                    </div>
+
+                    <!-- Active Contributors -->
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-secondary mb-2" id="contributor-count">8,456</div>
+                        <div class="text-text-secondary font-medium">Active Contributors</div>
+                        <div class="text-sm text-success mt-1">↗ +127 today</div>
+                    </div>
+
+                    <!-- Next Payout Countdown -->
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-accent mb-2">
+                            <span id="countdown-days">02</span>d 
+                            <span id="countdown-hours">14</span>h 
+                            <span id="countdown-minutes">32</span>m
+                        </div>
+                        <div class="text-text-secondary font-medium">Next Payout In</div>
+                        <div class="text-sm text-accent mt-1">September 18, 2025</div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-text-secondary">Pool Growth Progress</span>
+                        <span class="text-sm font-semibold text-primary">78% to next milestone</span>
+                    </div>
+                    <div class="w-full bg-surface-200 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-primary to-secondary h-3 rounded-full transition-all duration-1000" style="width: 78%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-text-tertiary mt-1">
+                        <span>₹10,00,000</span>
+                        <span>₹20,00,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pool Visualization Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-text-primary mb-4">Pool Analytics</h2>
+                <p class="text-text-secondary text-lg">Real-time insights into community contributions and growth</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Pool Growth Chart -->
+                <div class="bg-surface rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-text-primary mb-4">Pool Growth Over Time</h3>
+                    <div class="h-64 flex items-end justify-between space-x-2">
+                        <div class="flex flex-col items-center">
+                            <div class="bg-primary rounded-t h-32 w-8 mb-2"></div>
+                            <span class="text-xs text-text-secondary">Sep 1</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-primary rounded-t h-40 w-8 mb-2"></div>
+                            <span class="text-xs text-text-secondary">Sep 3</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-primary rounded-t h-36 w-8 mb-2"></div>
+                            <span class="text-xs text-text-secondary">Sep 5</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-primary rounded-t h-48 w-8 mb-2"></div>
+                            <span class="text-xs text-text-secondary">Sep 7</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-primary rounded-t h-44 w-8 mb-2"></div>
+                            <span class="text-xs text-text-secondary">Sep 9</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-primary rounded-t h-52 w-8 mb-2"></div>
+                            <span class="text-xs text-text-secondary">Sep 11</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-primary rounded-t h-56 w-8 mb-2"></div>
+                            <span class="text-xs text-text-secondary">Sep 13</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-accent rounded-t h-60 w-8 mb-2"></div>
+                            <span class="text-xs text-text-secondary">Sep 15</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contribution Heatmap -->
+                <div class="bg-surface rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-text-primary mb-4">Member Contribution Activity</h3>
+                    <div class="grid grid-cols-7 gap-1">
+                        <!-- Week 1 -->
+                        <div class="h-8 w-8 bg-primary-100 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-200 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-300 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-400 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-500 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-600 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-300 rounded"></div>
+                        <!-- Week 2 -->
+                        <div class="h-8 w-8 bg-primary-400 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-600 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-500 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-700 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-600 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-400 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-200 rounded"></div>
+                        <!-- Week 3 -->
+                        <div class="h-8 w-8 bg-primary-300 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-500 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-600 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-700 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-800 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-600 rounded"></div>
+                        <div class="h-8 w-8 bg-primary-400 rounded"></div>
+                    </div>
+                    <div class="flex justify-between items-center mt-4 text-xs text-text-secondary">
+                        <span>Less</span>
+                        <div class="flex space-x-1">
+                            <div class="h-3 w-3 bg-primary-100 rounded"></div>
+                            <div class="h-3 w-3 bg-primary-300 rounded"></div>
+                            <div class="h-3 w-3 bg-primary-500 rounded"></div>
+                            <div class="h-3 w-3 bg-primary-700 rounded"></div>
+                        </div>
+                        <span>More</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Distribution Algorithm Section -->
+    <section class="py-16 bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-text-primary mb-4">Transparent Distribution</h2>
+                <p class="text-text-secondary text-lg">How payouts are calculated and distributed fairly</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Step 1 -->
+                <div class="bg-white rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-primary">1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-text-primary mb-3">Pool Collection</h3>
+                    <p class="text-text-secondary">All member contributions are collected into the global pool with real-time tracking and transparency.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-secondary">2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-text-primary mb-3">Fair Calculation</h3>
+                    <p class="text-text-secondary">Distribution is calculated based on contribution level, referral activity, and membership duration.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-accent">3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-text-primary mb-3">Instant Payout</h3>
+                    <p class="text-text-secondary">Eligible members receive their share instantly via secure payment processing with full transparency.</p>
+                </div>
+            </div>
+
+            <!-- Distribution Formula -->
+            <div class="bg-white rounded-lg p-8">
+                <h3 class="text-2xl font-semibold text-text-primary mb-6 text-center">Distribution Formula</h3>
+                <div class="bg-surface rounded-lg p-6 font-mono text-center">
+                    <div class="text-lg text-text-primary mb-4">
+                        Your Share = (Pool Total × Your Points) ÷ Total Community Points
+                    </div>
+                    <div class="text-sm text-text-secondary">
+                        Points = Base Contribution + Referral Bonus + Activity Multiplier
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Member Spotlights Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-text-primary mb-4">Recent Big Winners</h2>
+                <p class="text-text-secondary text-lg">Celebrating our community's success stories</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Winner 1 -->
+                <div class="bg-gradient-to-br from-primary-50 to-primary-100 rounded-lg p-6 text-center">
+                    <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=100&h=100&fit=crop&crop=face" alt="Arjun Mehta" class="w-20 h-20 rounded-full object-cover mx-auto mb-4" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    <h4 class="text-xl font-semibold text-text-primary mb-2">Arjun Mehta</h4>
+                    <div class="text-3xl font-bold text-primary mb-2">₹1,23,450</div>
+                    <p class="text-text-secondary text-sm mb-4">"Consistent contributions and active referrals paid off! This platform truly rewards dedication."</p>
+                    <div class="text-xs text-text-tertiary">Last Payout: Sep 12, 2025</div>
+                </div>
+
+                <!-- Winner 2 -->
+                <div class="bg-gradient-to-br from-secondary-50 to-secondary-100 rounded-lg p-6 text-center">
+                    <img src="https://images.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg?w=100&h=100&fit=crop&crop=face" alt="Kavita Singh" class="w-20 h-20 rounded-full object-cover mx-auto mb-4" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    <h4 class="text-xl font-semibold text-text-primary mb-2">Kavita Singh</h4>
+                    <div class="text-3xl font-bold text-secondary mb-2">₹89,760</div>
+                    <p class="text-text-secondary text-sm mb-4">"The transparency here is amazing. I can see exactly how my earnings are calculated."</p>
+                    <div class="text-xs text-text-tertiary">Last Payout: Sep 12, 2025</div>
+                </div>
+
+                <!-- Winner 3 -->
+                <div class="bg-gradient-to-br from-accent-50 to-accent-100 rounded-lg p-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Rohit Sharma" class="w-20 h-20 rounded-full object-cover mx-auto mb-4" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    <h4 class="text-xl font-semibold text-text-primary mb-2">Rohit Sharma</h4>
+                    <div class="text-3xl font-bold text-accent mb-2">₹67,890</div>
+                    <p class="text-text-secondary text-sm mb-4">"Started small but the compound growth is incredible. Best decision I made this year!"</p>
+                    <div class="text-xs text-text-tertiary">Last Payout: Sep 12, 2025</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Activity Feed -->
+    <section class="py-16 bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-text-primary mb-4">Live Activity Feed</h2>
+                <p class="text-text-secondary text-lg">Real-time community contributions and payouts</p>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 max-w-4xl mx-auto">
+                <div class="space-y-4">
+                    <!-- Activity Item 1 -->
+                    <div class="flex items-center justify-between p-4 bg-success-50 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-success rounded-full mr-3 animate-pulse"></div>
+                            <span class="text-text-primary">Member R***h contributed to the pool</span>
+                        </div>
+                        <div class="text-success font-semibold">+₹5,000</div>
+                        <div class="text-xs text-text-tertiary">2 min ago</div>
+                    </div>
+
+                    <!-- Activity Item 2 -->
+                    <div class="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-primary rounded-full mr-3 animate-pulse"></div>
+                            <span class="text-text-primary">Member A***a received payout</span>
+                        </div>
+                        <div class="text-primary font-semibold">₹12,450</div>
+                        <div class="text-xs text-text-tertiary">5 min ago</div>
+                    </div>
+
+                    <!-- Activity Item 3 -->
+                    <div class="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-secondary rounded-full mr-3 animate-pulse"></div>
+                            <span class="text-text-primary">New member K***i joined the pool</span>
+                        </div>
+                        <div class="text-secondary font-semibold">Welcome!</div>
+                        <div class="text-xs text-text-tertiary">8 min ago</div>
+                    </div>
+
+                    <!-- Activity Item 4 -->
+                    <div class="flex items-center justify-between p-4 bg-accent-50 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-accent rounded-full mr-3 animate-pulse"></div>
+                            <span class="text-text-primary">Member S***v achieved milestone</span>
+                        </div>
+                        <div class="text-accent font-semibold">🏆 Level 5</div>
+                        <div class="text-xs text-text-tertiary">12 min ago</div>
+                    </div>
+
+                    <!-- Activity Item 5 -->
+                    <div class="flex items-center justify-between p-4 bg-success-50 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-success rounded-full mr-3 animate-pulse"></div>
+                            <span class="text-text-primary">Member P***l contributed to the pool</span>
+                        </div>
+                        <div class="text-success font-semibold">+₹3,500</div>
+                        <div class="text-xs text-text-tertiary">15 min ago</div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-6">
+                    <button class="text-primary hover:text-primary-700 font-semibold">View All Activity</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payout Calendar -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-text-primary mb-4">Payout Calendar</h2>
+                <p class="text-text-secondary text-lg">Historical distributions and upcoming dates</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Recent Payouts -->
+                <div class="bg-surface rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-text-primary mb-6">Recent Distributions</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-white rounded-lg">
+                            <div>
+                                <div class="font-semibold text-text-primary">September 12, 2025</div>
+                                <div class="text-sm text-text-secondary">8,234 members participated</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-lg font-bold text-success">₹14,56,780</div>
+                                <div class="text-xs text-text-tertiary">Distributed</div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center p-4 bg-white rounded-lg">
+                            <div>
+                                <div class="font-semibold text-text-primary">September 5, 2025</div>
+                                <div class="text-sm text-text-secondary">7,891 members participated</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-lg font-bold text-success">₹12,34,560</div>
+                                <div class="text-xs text-text-tertiary">Distributed</div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center p-4 bg-white rounded-lg">
+                            <div>
+                                <div class="font-semibold text-text-primary">August 29, 2025</div>
+                                <div class="text-sm text-text-secondary">7,456 members participated</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-lg font-bold text-success">₹11,78,920</div>
+                                <div class="text-xs text-text-tertiary">Distributed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Payouts -->
+                <div class="bg-surface rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-text-primary mb-6">Upcoming Distributions</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg border-2 border-primary-200">
+                            <div>
+                                <div class="font-semibold text-text-primary">September 18, 2025</div>
+                                <div class="text-sm text-text-secondary">8,456 eligible members</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-lg font-bold text-primary">₹15,67,890</div>
+                                <div class="text-xs text-accent">Next Payout</div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center p-4 bg-white rounded-lg">
+                            <div>
+                                <div class="font-semibold text-text-primary">September 25, 2025</div>
+                                <div class="text-sm text-text-secondary">Estimated participants</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-lg font-bold text-text-secondary">₹18,00,000</div>
+                                <div class="text-xs text-text-tertiary">Projected</div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center p-4 bg-white rounded-lg">
+                            <div>
+                                <div class="font-semibold text-text-primary">October 2, 2025</div>
+                                <div class="text-sm text-text-secondary">Estimated participants</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-lg font-bold text-text-secondary">₹20,50,000</div>
+                                <div class="text-xs text-text-tertiary">Projected</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section class="py-16 bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-text-primary mb-4">Top Contributors</h2>
+                <p class="text-text-secondary text-lg">Celebrating our most active community members</p>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 max-w-4xl mx-auto">
+                <div class="space-y-4">
+                    <!-- Rank 1 -->
+                    <div class="flex items-center justify-between p-4 bg-gradient-to-r from-accent-50 to-accent-100 rounded-lg border-2 border-accent-200">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white font-bold mr-4">1</div>
+                            <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?w=40&h=40&fit=crop&crop=face" alt="Top Contributor" class="w-10 h-10 rounded-full object-cover mr-3" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <div>
+                                <div class="font-semibold text-text-primary">M***a K.</div>
+                                <div class="text-sm text-text-secondary">Level 8 Contributor</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-accent">₹2,45,670</div>
+                            <div class="text-xs text-text-tertiary">Total Earned</div>
+                        </div>
+                    </div>
+
+                    <!-- Rank 2 -->
+                    <div class="flex items-center justify-between p-4 bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-4">2</div>
+                            <img src="https://images.pixabay.com/photo/2016/11/18/19/07/happy-1836445_1280.jpg?w=40&h=40&fit=crop&crop=face" alt="Second Place" class="w-10 h-10 rounded-full object-cover mr-3" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <div>
+                                <div class="font-semibold text-text-primary">R***t S.</div>
+                                <div class="text-sm text-text-secondary">Level 7 Contributor</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-primary">₹1,89,450</div>
+                            <div class="text-xs text-text-tertiary">Total Earned</div>
+                        </div>
+                    </div>
+
+                    <!-- Rank 3 -->
+                    <div class="flex items-center justify-between p-4 bg-gradient-to-r from-secondary-50 to-secondary-100 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white font-bold mr-4">3</div>
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Third Place" class="w-10 h-10 rounded-full object-cover mr-3" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <div>
+                                <div class="font-semibold text-text-primary">A***i P.</div>
+                                <div class="text-sm text-text-secondary">Level 6 Contributor</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-secondary">₹1,67,230</div>
+                            <div class="text-xs text-text-tertiary">Total Earned</div>
+                        </div>
+                    </div>
+
+                    <!-- Ranks 4-5 -->
+                    <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-text-tertiary rounded-full flex items-center justify-center text-white font-bold mr-4">4</div>
+                            <div>
+                                <div class="font-semibold text-text-primary">V***l G.</div>
+                                <div class="text-sm text-text-secondary">Level 6 Contributor</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-text-primary">₹1,34,890</div>
+                            <div class="text-xs text-text-tertiary">Total Earned</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-text-tertiary rounded-full flex items-center justify-center text-white font-bold mr-4">5</div>
+                            <div>
+                                <div class="font-semibold text-text-primary">N***a T.</div>
+                                <div class="text-sm text-text-secondary">Level 5 Contributor</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-text-primary">₹1,12,560</div>
+                            <div class="text-xs text-text-tertiary">Total Earned</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-6">
+                    <a href="member_dashboard.html" class="btn-primary">View Full Leaderboard</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Content -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-text-primary mb-4">Pool Mechanics Guide</h2>
+                <p class="text-text-secondary text-lg">Everything you need to know about maximizing your pool earnings</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Eligibility Requirements -->
+                <div class="bg-surface rounded-lg p-6">
+                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-text-primary mb-3">Eligibility Requirements</h3>
+                    <ul class="text-text-secondary space-y-2">
+                        <li>• Active membership for 30+ days</li>
+                        <li>• Minimum contribution of ₹1,000</li>
+                        <li>• At least 2 active referrals</li>
+                        <li>• Complete profile verification</li>
+                    </ul>
+                </div>
+
+                <!-- Optimization Strategies -->
+                <div class="bg-surface rounded-lg p-6">
+                    <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-text-primary mb-3">Optimization Tips</h3>
+                    <ul class="text-text-secondary space-y-2">
+                        <li>• Contribute consistently</li>
+                        <li>• Build active referral network</li>
+                        <li>• Maintain high activity score</li>
+                        <li>• Participate in community events</li>
+                    </ul>
+                </div>
+
+                <!-- Payout Schedule -->
+                <div class="bg-surface rounded-lg p-6">
+                    <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-text-primary mb-3">Payout Schedule</h3>
+                    <ul class="text-text-secondary space-y-2">
+                        <li>• Weekly distributions</li>
+                        <li>• Every Wednesday at 12:00 PM</li>
+                        <li>• Instant bank transfers</li>
+                        <li>• SMS & email notifications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Sharing & Community -->
+    <section class="py-16 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Share the Success</h2>
+            <p class="text-xl mb-8 opacity-90">Help grow our community and increase the pool for everyone</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <button class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    📱 Share on WhatsApp
+                </button>
+                <button class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    📘 Share on Facebook
+                </button>
+                <button class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    🐦 Share on Twitter
+                </button>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+                <h3 class="text-xl font-semibold mb-4">Your Referral Impact</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div>
+                        <div class="text-2xl font-bold">+₹5,000</div>
+                        <div class="text-sm opacity-75">Per successful referral</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold">15%</div>
+                        <div class="text-sm opacity-75">Pool share bonus</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold">∞</div>
+                        <div class="text-sm opacity-75">Unlimited referrals</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-text-primary text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L20 10H28L22 16L24 24L16 20L8 24L10 16L4 10H12L16 2Z"/>
+                            <circle cx="16" cy="16" r="3" fill="white"/>
+                        </svg>
+                        <span class="ml-2 text-xl font-bold">Green Grow Platform</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Transparent growth, real rewards. Building the future of ethical network marketing.</p>
+                    <div class="flex space-x-4">
+                        <a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="homepage.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="member_dashboard.html" class="text-gray-400 hover:text-white transition-colors">Dashboard</a></li>
+                        <li><a href="rewards_center.html" class="text-gray-400 hover:text-white transition-colors">Rewards</a></li>
+                        <li><a href="global_pool.html" class="text-gray-400 hover:text-white transition-colors">Global Pool</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📧 support@greengrow.com</p>
+                        <p>📞 +91 98765 43210</p>
+                        <p>📍 Mumbai, Maharashtra, India</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Green Grow Private Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Countdown timer for next payout
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const targetDate = new Date('2025-09-18 12:00:00').getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+        }
+
+        // Update countdown every minute
+        setInterval(updateCountdown, 60000);
+        updateCountdown();
+
+        // Animate pool total on page load
+        function animatePoolTotal() {
+            const poolElement = document.getElementById('pool-total');
+            const targetValue = 1567890;
+            let currentValue = 0;
+            const increment = targetValue / 100;
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= targetValue) {
+                    currentValue = targetValue;
+                    clearInterval(timer);
+                }
+                poolElement.textContent = '₹' + Math.floor(currentValue).toLocaleString('en-IN');
+            }, 20);
+        }
+
+        // Animate contributor count
+        function animateContributorCount() {
+            const countElement = document.getElementById('contributor-count');
+            const targetValue = 8456;
+            let currentValue = 0;
+            const increment = targetValue / 80;
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= targetValue) {
+                    currentValue = targetValue;
+                    clearInterval(timer);
+                }
+                countElement.textContent = Math.floor(currentValue).toLocaleString('en-IN');
+            }, 25);
+        }
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            animatePoolTotal();
+            animateContributorCount();
+        });
+
+        // Simulate live activity updates
+        function updateLiveActivity() {
+            const activities = [
+                { type: 'contribution', member: 'R***h', amount: '+₹5,000', color: 'success' },
+                { type: 'payout', member: 'A***a', amount: '₹12,450', color: 'primary' },
+                { type: 'join', member: 'K***i', amount: 'Welcome!', color: 'secondary' },
+                { type: 'milestone', member: 'S***v', amount: '🏆 Level 5', color: 'accent' }
+            ];
+
+            // This would typically connect to a WebSocket for real-time updates
+            // For demo purposes, we'll just log the simulation
+            console.log('Live activity simulation running...');
+        }
+
+        // Start live activity simulation
+        setInterval(updateLiveActivity, 30000); // Update every 30 seconds
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
