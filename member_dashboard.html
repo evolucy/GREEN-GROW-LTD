@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Member Dashboard - Green Grow Platform</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="description" content="Your personalized Green Grow dashboard - track earnings, manage referrals, and monitor your growth journey." />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fgreengrow2715back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-white border-b border-border sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L20 10H28L22 16L24 24L16 20L8 24L10 16L4 10H12L16 2Z"/>
+                            <circle cx="16" cy="16" r="3" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-bold text-text-primary">Green Grow</h1>
+                        <p class="text-xs text-text-secondary">Platform</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Home</a>
+                        <a href="member_dashboard.html" class="text-primary font-semibold px-3 py-2 rounded-md text-sm">Dashboard</a>
+                        <a href="rewards_center.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Rewards</a>
+                        <a href="global_pool.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Global Pool</a>
+                        <a href="admin_dashboard.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Admin</a>
+                    </div>
+                </div>
+
+                <!-- User Profile & Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center text-text-secondary hover:text-primary transition-colors" onclick="toggleNotifications()">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 0-8-3-8-6s4-6 9-6 9 3 9 6c0 3-3 6-8 6z"/>
+                            </svg>
+                            <span class="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="Profile" class="w-8 h-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <span class="text-sm font-medium text-text-primary">Rajesh Kumar</span>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-text-secondary hover:text-primary focus:outline-none focus:text-primary" onclick="toggleMobileMenu()">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-border">
+                    <a href="homepage.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Home</a>
+                    <a href="member_dashboard.html" class="text-primary font-semibold block px-3 py-2 rounded-md text-base">Dashboard</a>
+                    <a href="rewards_center.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Rewards</a>
+                    <a href="global_pool.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Global Pool</a>
+                    <a href="admin_dashboard.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Admin</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-text-primary mb-2">Welcome back, Rajesh!</h1>
+                    <p class="text-text-secondary">Here's your growth summary for today</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <button class="btn-primary" onclick="shareReferralLink()">
+                        Share Referral Link
+                        <svg class="w-4 h-4 ml-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                        </svg>
+                    </button>
+                    <button class="bg-white border border-border text-text-primary px-4 py-2 rounded-lg hover:bg-surface transition-colors" onclick="updateBankDetails()">
+                        Update Bank Details
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Metrics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Earnings -->
+            <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Total Earnings</p>
+                        <p class="text-3xl font-bold text-primary">₹2,45,670</p>
+                        <p class="text-success text-sm mt-1">↗ +₹12,450 this month</p>
+                    </div>
+                    <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Withdrawals -->
+            <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Pending Withdrawals</p>
+                        <p class="text-3xl font-bold text-accent">₹15,890</p>
+                        <p class="text-text-secondary text-sm mt-1">Processing in 2-3 days</p>
+                    </div>
+                    <div class="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Referrals -->
+            <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Active Referrals</p>
+                        <p class="text-3xl font-bold text-secondary">47</p>
+                        <p class="text-success text-sm mt-1">↗ +3 this week</p>
+                    </div>
+                    <div class="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard Position -->
+            <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Leaderboard Position</p>
+                        <p class="text-3xl font-bold text-text-primary">#23</p>
+                        <p class="text-success text-sm mt-1">↗ Up 5 positions</p>
+                    </div>
+                    <div class="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement Progress -->
+        <div class="bg-white rounded-lg p-6 shadow-soft border border-border mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-text-primary">Next Achievement Level</h2>
+                <span class="text-sm text-text-secondary">Silver Elite - 78% Complete</span>
+            </div>
+            <div class="w-full bg-surface rounded-full h-3 mb-4">
+                <div class="bg-gradient-to-r from-primary to-secondary h-3 rounded-full transition-all duration-500" style="width: 78%"></div>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+                <span class="text-text-secondary">₹2,45,670 earned</span>
+                <span class="text-text-secondary">₹3,15,000 target</span>
+            </div>
+            <div class="mt-4 p-4 bg-accent-50 rounded-lg">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-text-primary">Silver Elite Reward Preview</h3>
+                        <p class="text-text-secondary text-sm">iPhone 15 Pro + ₹25,000 bonus + Premium member benefits</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column - Referral Management & Family Tree -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Referral Management -->
+                <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                    <h2 class="text-xl font-semibold text-text-primary mb-6">Referral Management</h2>
+                    
+                    <!-- Referral Link Generator -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-text-primary mb-2">Your Referral Link</label>
+                        <div class="flex">
+                            <input type="text" value="https://greengrow.com/join/RK2024" class="input-field rounded-r-none" readonly id="referral-link" />
+                            <button class="bg-primary text-white px-4 py-3 rounded-r-lg hover:bg-primary-700 transition-colors" onclick="copyReferralLink()">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- QR Code -->
+                    <div class="flex items-center space-x-6 mb-6">
+                        <div class="bg-surface p-4 rounded-lg">
+                            <div class="w-24 h-24 bg-text-primary rounded-lg flex items-center justify-center">
+                                <svg class="w-16 h-16 text-white" viewBox="0 0 100 100">
+                                    <rect x="0" y="0" width="20" height="20" fill="currentColor"/>
+                                    <rect x="25" y="0" width="15" height="15" fill="currentColor"/>
+                                    <rect x="45" y="0" width="10" height="10" fill="currentColor"/>
+                                    <rect x="60" y="0" width="20" height="20" fill="currentColor"/>
+                                    <rect x="85" y="0" width="15" height="15" fill="currentColor"/>
+                                    <rect x="0" y="25" width="15" height="15" fill="currentColor"/>
+                                    <rect x="20" y="25" width="10" height="10" fill="currentColor"/>
+                                    <rect x="35" y="25" width="15" height="15" fill="currentColor"/>
+                                    <rect x="55" y="25" width="10" height="10" fill="currentColor"/>
+                                    <rect x="70" y="25" width="15" height="15" fill="currentColor"/>
+                                    <rect x="90" y="25" width="10" height="10" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-text-primary mb-2">Mobile QR Code</h3>
+                            <p class="text-text-secondary text-sm mb-3">Share this QR code for instant mobile signup</p>
+                            <button class="text-primary hover:text-primary-700 text-sm font-medium" onclick="downloadQR()">Download QR Code</button>
+                        </div>
+                    </div>
+
+                    <!-- Performance Analytics -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="text-center p-4 bg-surface rounded-lg">
+                            <div class="text-2xl font-bold text-primary">1,247</div>
+                            <div class="text-sm text-text-secondary">Link Clicks</div>
+                        </div>
+                        <div class="text-center p-4 bg-surface rounded-lg">
+                            <div class="text-2xl font-bold text-secondary">23.4%</div>
+                            <div class="text-sm text-text-secondary">Conversion Rate</div>
+                        </div>
+                        <div class="text-center p-4 bg-surface rounded-lg">
+                            <div class="text-2xl font-bold text-accent">47</div>
+                            <div class="text-sm text-text-secondary">Total Signups</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Family Tree -->
+                <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-semibold text-text-primary">Your Network Tree</h2>
+                        <button class="text-primary hover:text-primary-700 text-sm font-medium" onclick="expandAllNodes()">Expand All</button>
+                    </div>
+                    
+                    <!-- Tree Visualization -->
+                    <div class="overflow-x-auto">
+                        <div class="min-w-full">
+                            <!-- Root Node (You) -->
+                            <div class="flex flex-col items-center mb-8">
+                                <div class="bg-primary-100 border-2 border-primary rounded-lg p-4 text-center">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=48&h=48&fit=crop&crop=face" alt="You" class="w-12 h-12 rounded-full mx-auto mb-2 object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    <div class="font-semibold text-text-primary">You</div>
+                                    <div class="text-sm text-text-secondary">₹2,45,670</div>
+                                </div>
+                                
+                                <!-- Connection Lines -->
+                                <div class="w-px h-8 bg-border"></div>
+                                <div class="w-32 h-px bg-border"></div>
+                                <div class="w-px h-8 bg-border"></div>
+                            </div>
+
+                            <!-- Level 1 Referrals -->
+                            <div class="flex justify-center space-x-8 mb-6">
+                                <!-- Direct Referral 1 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="bg-secondary-100 border border-secondary rounded-lg p-3 text-center cursor-pointer hover:shadow-soft transition-all" onclick="toggleNode('node1')">
+                                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Priya" class="w-10 h-10 rounded-full mx-auto mb-2 object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        <div class="font-medium text-text-primary text-sm">Priya S.</div>
+                                        <div class="text-xs text-text-secondary">₹89,450</div>
+                                        <div class="text-xs text-success">+12 refs</div>
+                                    </div>
+                                    
+                                    <!-- Sub-referrals indicator -->
+                                    <div id="node1" class="hidden mt-4 space-y-2">
+                                        <div class="w-px h-4 bg-border mx-auto"></div>
+                                        <div class="flex space-x-2">
+                                            <div class="bg-surface border border-border rounded p-2 text-center">
+                                                <div class="w-6 h-6 bg-accent rounded-full mx-auto mb-1"></div>
+                                                <div class="text-xs">Amit</div>
+                                            </div>
+                                            <div class="bg-surface border border-border rounded p-2 text-center">
+                                                <div class="w-6 h-6 bg-accent rounded-full mx-auto mb-1"></div>
+                                                <div class="text-xs">Neha</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Direct Referral 2 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="bg-accent-100 border border-accent rounded-lg p-3 text-center cursor-pointer hover:shadow-soft transition-all" onclick="toggleNode('node2')">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Vikash" class="w-10 h-10 rounded-full mx-auto mb-2 object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        <div class="font-medium text-text-primary text-sm">Vikash K.</div>
+                                        <div class="text-xs text-text-secondary">₹1,23,890</div>
+                                        <div class="text-xs text-success">+8 refs</div>
+                                    </div>
+                                    
+                                    <!-- Sub-referrals indicator -->
+                                    <div id="node2" class="hidden mt-4 space-y-2">
+                                        <div class="w-px h-4 bg-border mx-auto"></div>
+                                        <div class="flex space-x-2">
+                                            <div class="bg-surface border border-border rounded p-2 text-center">
+                                                <div class="w-6 h-6 bg-primary rounded-full mx-auto mb-1"></div>
+                                                <div class="text-xs">Ravi</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Direct Referral 3 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="bg-primary-100 border border-primary rounded-lg p-3 text-center">
+                                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face" alt="Sunita" class="w-10 h-10 rounded-full mx-auto mb-2 object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                        <div class="font-medium text-text-primary text-sm">Sunita M.</div>
+                                        <div class="text-xs text-text-secondary">₹67,230</div>
+                                        <div class="text-xs text-success">+5 refs</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Earnings & Quick Actions -->
+            <div class="space-y-8">
+                <!-- Earnings Tracker -->
+                <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-text-primary">Earnings Tracker</h2>
+                        <select class="text-sm border border-border rounded px-3 py-1" onchange="updateEarningsChart(this.value)">
+                            <option value="daily">Daily</option>
+                            <option value="weekly" selected>Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Chart Placeholder -->
+                    <div class="h-48 bg-surface rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-full h-full p-4" viewBox="0 0 400 200">
+                            <defs>
+                                <linearGradient id="earningsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#059669;stop-opacity:0.3"/>
+                                    <stop offset="100%" style="stop-color:#059669;stop-opacity:0"/>
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Grid Lines -->
+                            <g stroke="#e5e7eb" stroke-width="1" opacity="0.5">
+                                <line x1="50" y1="20" x2="50" y2="180"/>
+                                <line x1="100" y1="20" x2="100" y2="180"/>
+                                <line x1="150" y1="20" x2="150" y2="180"/>
+                                <line x1="200" y1="20" x2="200" y2="180"/>
+                                <line x1="250" y1="20" x2="250" y2="180"/>
+                                <line x1="300" y1="20" x2="300" y2="180"/>
+                                <line x1="350" y1="20" x2="350" y2="180"/>
+                                
+                                <line x1="50" y1="40" x2="350" y2="40"/>
+                                <line x1="50" y1="80" x2="350" y2="80"/>
+                                <line x1="50" y1="120" x2="350" y2="120"/>
+                                <line x1="50" y1="160" x2="350" y2="160"/>
+                            </g>
+                            
+                            <!-- Earnings Line -->
+                            <path d="M50,160 L100,140 L150,120 L200,100 L250,90 L300,70 L350,50" stroke="#059669" stroke-width="3" fill="none"/>
+                            
+                            <!-- Area Fill -->
+                            <path d="M50,160 L100,140 L150,120 L200,100 L250,90 L300,70 L350,50 L350,180 L50,180 Z" fill="url(#earningsGradient)"/>
+                            
+                            <!-- Data Points -->
+                            <circle cx="50" cy="160" r="4" fill="#059669"/>
+                            <circle cx="100" cy="140" r="4" fill="#059669"/>
+                            <circle cx="150" cy="120" r="4" fill="#059669"/>
+                            <circle cx="200" cy="100" r="4" fill="#059669"/>
+                            <circle cx="250" cy="90" r="4" fill="#059669"/>
+                            <circle cx="300" cy="70" r="4" fill="#059669"/>
+                            <circle cx="350" cy="50" r="4" fill="#059669"/>
+                            
+                            <!-- Labels -->
+                            <text x="50" y="195" text-anchor="middle" class="text-xs fill-current text-text-secondary">Mon</text>
+                            <text x="100" y="195" text-anchor="middle" class="text-xs fill-current text-text-secondary">Tue</text>
+                            <text x="150" y="195" text-anchor="middle" class="text-xs fill-current text-text-secondary">Wed</text>
+                            <text x="200" y="195" text-anchor="middle" class="text-xs fill-current text-text-secondary">Thu</text>
+                            <text x="250" y="195" text-anchor="middle" class="text-xs fill-current text-text-secondary">Fri</text>
+                            <text x="300" y="195" text-anchor="middle" class="text-xs fill-current text-text-secondary">Sat</text>
+                            <text x="350" y="195" text-anchor="middle" class="text-xs fill-current text-text-secondary">Sun</text>
+                        </svg>
+                    </div>
+                    
+                    <!-- Earnings Summary -->
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <div class="text-lg font-bold text-primary">₹12,450</div>
+                            <div class="text-sm text-text-secondary">This Week</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold text-secondary">₹45,670</div>
+                            <div class="text-sm text-text-secondary">This Month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4">Quick Actions</h2>
+                    <div class="space-y-3">
+                        <button class="w-full btn-primary text-left flex items-center justify-between" onclick="claimRewards()">
+                            <span>Claim Available Rewards</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        
+                        <button class="w-full bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out hover:bg-secondary-700 text-left flex items-center justify-between" onclick="withdrawEarnings()">
+                            <span>Withdraw Earnings</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                            </svg>
+                        </button>
+                        
+                        <button class="w-full bg-accent text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out hover:bg-accent-700 text-left flex items-center justify-between" onclick="shareToSocial()">
+                            <span>Share to Social Media</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                            </svg>
+                        </button>
+                        
+                        <button class="w-full bg-white border border-border text-text-primary px-6 py-3 rounded-lg font-semibold hover:bg-surface transition-colors text-left flex items-center justify-between" onclick="updateProfile()">
+                            <span>Update Profile</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Global Pool Countdown -->
+                <div class="bg-gradient-to-br from-primary-600 to-secondary-600 text-white rounded-lg p-6">
+                    <h2 class="text-xl font-semibold mb-4">Next Pool Distribution</h2>
+                    <div class="text-center mb-4">
+                        <div class="text-2xl font-bold mb-2">₹15,67,890</div>
+                        <div class="text-sm opacity-90">Total Pool Amount</div>
+                    </div>
+                    
+                    <!-- Countdown Timer -->
+                    <div class="grid grid-cols-4 gap-2 mb-4">
+                        <div class="text-center">
+                            <div class="text-xl font-bold" id="pool-days">02</div>
+                            <div class="text-xs opacity-75">Days</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl font-bold" id="pool-hours">14</div>
+                            <div class="text-xs opacity-75">Hours</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl font-bold" id="pool-minutes">32</div>
+                            <div class="text-xs opacity-75">Minutes</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl font-bold" id="pool-seconds">18</div>
+                            <div class="text-xs opacity-75">Seconds</div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="text-lg font-semibold mb-1">Your Estimated Share</div>
+                        <div class="text-2xl font-bold text-accent-200">₹8,450</div>
+                    </div>
+                    
+                    <a href="global_pool.html" class="block w-full bg-white text-primary text-center px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors mt-4">
+                        View Pool Details
+                    </a>
+                </div>
+
+                <!-- Achievement Badges -->
+                <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4">Recent Achievements</h2>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 p-3 bg-accent-50 rounded-lg">
+                            <div class="w-10 h-10 bg-accent-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-text-primary">Top Performer</div>
+                                <div class="text-sm text-text-secondary">Earned ₹10,000+ this week</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3 p-3 bg-primary-50 rounded-lg">
+                            <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-text-primary">Network Builder</div>
+                                <div class="text-sm text-text-secondary">Reached 45+ active referrals</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-text-primary text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L20 10H28L22 16L24 24L16 20L8 24L10 16L4 10H12L16 2Z"/>
+                            <circle cx="16" cy="16" r="3" fill="white"/>
+                        </svg>
+                        <span class="ml-2 text-xl font-bold">Green Grow Platform</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Transparent growth, real rewards. Building the future of ethical network marketing.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="homepage.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="member_dashboard.html" class="text-gray-400 hover:text-white transition-colors">Dashboard</a></li>
+                        <li><a href="rewards_center.html" class="text-gray-400 hover:text-white transition-colors">Rewards</a></li>
+                        <li><a href="global_pool.html" class="text-gray-400 hover:text-white transition-colors">Global Pool</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📧 support@greengrow.com</p>
+                        <p>📞 +91 98765 43210</p>
+                        <p>📍 Mumbai, Maharashtra, India</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Green Grow Private Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Notifications toggle
+        function toggleNotifications() {
+            // Placeholder for notifications functionality
+            alert('Notifications feature coming soon!');
+        }
+
+        // Copy referral link
+        function copyReferralLink() {
+            const linkInput = document.getElementById('referral-link');
+            linkInput.select();
+            document.execCommand('copy');
+            
+            // Show success feedback
+            const button = event.target.closest('button');
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+            button.classList.add('bg-success');
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.classList.remove('bg-success');
+            }, 2000);
+        }
+
+        // Share referral link
+        function shareReferralLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Join Green Grow Platform',
+                    text: 'Join me on Green Grow Platform and start earning real rewards!',
+                    url: 'https://greengrow.com/join/RK2024'
+                });
+            } else {
+                copyReferralLink();
+                alert('Referral link copied to clipboard!');
+            }
+        }
+
+        // Download QR Code
+        function downloadQR() {
+            // Placeholder for QR download functionality
+            alert('QR Code download feature coming soon!');
+        }
+
+        // Toggle family tree nodes
+        function toggleNode(nodeId) {
+            const node = document.getElementById(nodeId);
+            node.classList.toggle('hidden');
+        }
+
+        // Expand all nodes
+        function expandAllNodes() {
+            const nodes = document.querySelectorAll('[id^="node"]');
+            nodes.forEach(node => {
+                node.classList.remove('hidden');
+            });
+        }
+
+        // Update earnings chart
+        function updateEarningsChart(period) {
+            // Placeholder for chart update functionality
+            console.log('Updating chart for period:', period);
+        }
+
+        // Quick action functions
+        function claimRewards() {
+            window.location.href = 'rewards_center.html';
+        }
+
+        function withdrawEarnings() {
+            alert('Withdrawal request submitted! Processing time: 2-3 business days.');
+        }
+
+        function shareToSocial() {
+            const text = 'Check out my earnings on Green Grow Platform! Join me and start building wealth through transparent growth. #GreenGrow #EthicalMLM';
+            const url = 'https://greengrow.com/join/RK2024';
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Green Grow Success',
+                    text: text,
+                    url: url
+                });
+            } else {
+                // Fallback to Twitter
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+            }
+        }
+
+        function updateProfile() {
+            alert('Profile update feature coming soon!');
+        }
+
+        function updateBankDetails() {
+            alert('Bank details update feature coming soon!');
+        }
+
+        // Global pool countdown
+        function updatePoolCountdown() {
+            const now = new Date().getTime();
+            const targetDate = new Date('2025-09-18 00:00:00').getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('pool-days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('pool-hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('pool-minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('pool-seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updatePoolCountdown, 1000);
+        updatePoolCountdown();
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any initialization code here
+            console.log('Member dashboard loaded successfully');
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
