@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Green Grow Platform</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="description" content="Comprehensive admin dashboard for Green Grow Platform management, analytics, and operations oversight." />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fgreengrow2715back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-surface">
+    <!-- Navigation Header -->
+    <header class="bg-white border-b border-border sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L20 10H28L22 16L24 24L16 20L8 24L10 16L4 10H12L16 2Z"/>
+                            <circle cx="16" cy="16" r="3" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-bold text-text-primary">Green Grow</h1>
+                        <p class="text-xs text-text-secondary">Admin Portal</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Home</a>
+                        <a href="member_dashboard.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Dashboard</a>
+                        <a href="rewards_center.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Rewards</a>
+                        <a href="global_pool.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-colors">Global Pool</a>
+                        <a href="admin_dashboard.html" class="text-primary font-semibold px-3 py-2 rounded-md text-sm">Admin</a>
+                    </div>
+                </div>
+
+                <!-- Admin Profile -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="text-text-secondary hover:text-primary transition-colors" onclick="toggleNotifications()">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 0-8-3-8-6s4-6 9-6 9 3 9 6-4 6-9 6z"/>
+                            </svg>
+                            <span class="absolute -top-1 -right-1 bg-error text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="Admin" class="w-8 h-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <span class="ml-2 text-sm font-medium text-text-primary">Admin</span>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-text-secondary hover:text-primary focus:outline-none focus:text-primary" onclick="toggleMobileMenu()">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-border">
+                    <a href="homepage.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Home</a>
+                    <a href="member_dashboard.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Dashboard</a>
+                    <a href="rewards_center.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Rewards</a>
+                    <a href="global_pool.html" class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base transition-colors">Global Pool</a>
+                    <a href="admin_dashboard.html" class="text-primary font-semibold block px-3 py-2 rounded-md text-base">Admin</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:pt-16 bg-white border-r border-border">
+            <div class="flex-1 flex flex-col min-h-0 pt-5 pb-4 overflow-y-auto">
+                <nav class="mt-5 flex-1 px-2 space-y-1">
+                    <a href="#overview" class="bg-primary-50 text-primary group flex items-center px-2 py-2 text-sm font-medium rounded-md" onclick="showSection('overview')">
+                        <svg class="text-primary mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        Overview
+                    </a>
+
+                    <a href="#users" class="text-text-secondary hover:bg-surface hover:text-text-primary group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors" onclick="showSection('users')">
+                        <svg class="text-text-secondary mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                        </svg>
+                        User Management
+                    </a>
+
+                    <a href="#pools" class="text-text-secondary hover:bg-surface hover:text-text-primary group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors" onclick="showSection('pools')">
+                        <svg class="text-text-secondary mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        Pool Management
+                    </a>
+
+                    <a href="#analytics" class="text-text-secondary hover:bg-surface hover:text-text-primary group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors" onclick="showSection('analytics')">
+                        <svg class="text-text-secondary mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        Analytics
+                    </a>
+
+                    <a href="#notifications" class="text-text-secondary hover:bg-surface hover:text-text-primary group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors" onclick="showSection('notifications')">
+                        <svg class="text-text-secondary mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 0-8-3-8-6s4-6 9-6 9 3 9 6-4 6-9 6z"/>
+                        </svg>
+                        Notifications
+                    </a>
+
+                    <a href="#compliance" class="text-text-secondary hover:bg-surface hover:text-text-primary group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors" onclick="showSection('compliance')">
+                        <svg class="text-text-secondary mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                        Compliance
+                    </a>
+
+                    <a href="#support" class="text-text-secondary hover:bg-surface hover:text-text-primary group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors" onclick="showSection('support')">
+                        <svg class="text-text-secondary mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        Support
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="lg:pl-64 flex-1">
+            <div class="px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Overview Section -->
+                <div id="overview-section" class="section-content">
+                    <!-- Page Header -->
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-text-primary">Admin Dashboard</h1>
+                        <p class="text-text-secondary mt-2">Comprehensive platform oversight and management</p>
+                        <div class="text-sm text-text-tertiary mt-1">Last updated: September 15, 2025 at 7:42 PM IST</div>
+                    </div>
+
+                    <!-- Critical Metrics -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-5 w-0 flex-1">
+                                    <dl>
+                                        <dt class="text-sm font-medium text-text-secondary truncate">Total Members</dt>
+                                        <dd class="text-2xl font-bold text-text-primary">12,847</dd>
+                                        <dd class="text-sm text-success">↗ +247 today</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-5 w-0 flex-1">
+                                    <dl>
+                                        <dt class="text-sm font-medium text-text-secondary truncate">Active Users</dt>
+                                        <dd class="text-2xl font-bold text-text-primary">8,934</dd>
+                                        <dd class="text-sm text-success">↗ +156 today</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-secondary-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-5 w-0 flex-1">
+                                    <dl>
+                                        <dt class="text-sm font-medium text-text-secondary truncate">Pool Balance</dt>
+                                        <dd class="text-2xl font-bold text-text-primary">₹15,67,890</dd>
+                                        <dd class="text-sm text-warning">Distribution in 2d 14h</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-5 w-0 flex-1">
+                                    <dl>
+                                        <dt class="text-sm font-medium text-text-secondary truncate">Pending Payouts</dt>
+                                        <dd class="text-2xl font-bold text-text-primary">₹4,23,560</dd>
+                                        <dd class="text-sm text-text-tertiary">234 members</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Health -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">System Health</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-text-secondary">Server Status</span>
+                                    <span class="flex items-center text-success">
+                                        <div class="w-2 h-2 bg-success rounded-full mr-2"></div>
+                                        Online
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-text-secondary">Database</span>
+                                    <span class="flex items-center text-success">
+                                        <div class="w-2 h-2 bg-success rounded-full mr-2"></div>
+                                        Healthy
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-text-secondary">Payment Gateway</span>
+                                    <span class="flex items-center text-success">
+                                        <div class="w-2 h-2 bg-success rounded-full mr-2"></div>
+                                        Connected
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-text-secondary">API Response Time</span>
+                                    <span class="text-text-primary font-medium">142ms</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Activity</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm text-text-primary">New member registration</p>
+                                        <p class="text-xs text-text-secondary">Priya Sharma joined - 2 minutes ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm text-text-primary">Pool distribution completed</p>
+                                        <p class="text-xs text-text-secondary">₹2,45,000 distributed - 1 hour ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-secondary rounded-full mt-2"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm text-text-primary">Reward claimed</p>
+                                        <p class="text-xs text-text-secondary">iPhone 15 Pro - Rajesh Kumar - 3 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Actions</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <button class="btn-primary text-center" onclick="showSection('pools')">
+                                Process Payouts
+                            </button>
+                            <button class="btn-secondary text-center" onclick="showSection('notifications')">
+                                Send Notification
+                            </button>
+                            <button class="btn-accent text-center" onclick="showSection('users')">
+                                Verify Members
+                            </button>
+                            <button class="bg-surface text-text-primary px-6 py-3 rounded-lg font-semibold hover:bg-surface-100 transition-colors" onclick="showSection('analytics')">
+                                View Reports
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management Section -->
+                <div id="users-section" class="section-content hidden">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-text-primary">User Management</h2>
+                        <p class="text-text-secondary mt-2">Manage member accounts, verifications, and communications</p>
+                    </div>
+
+                    <!-- Search and Filters -->
+                    <div class="bg-white rounded-lg p-6 shadow-soft border border-border mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Search Members</label>
+                                <input type="text" placeholder="Name, email, or ID" class="input-field" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Status</label>
+                                <select class="input-field">
+                                    <option>All Status</option>
+                                    <option>Active</option>
+                                    <option>Pending</option>
+                                    <option>Suspended</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Join Date</label>
+                                <select class="input-field">
+                                    <option>All Time</option>
+                                    <option>Last 7 days</option>
+                                    <option>Last 30 days</option>
+                                    <option>Last 90 days</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button class="btn-primary w-full">Search</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Members Table -->
+                    <div class="bg-white rounded-lg shadow-soft border border-border overflow-hidden">
+                        <div class="px-6 py-4 border-b border-border">
+                            <h3 class="text-lg font-semibold text-text-primary">Member Directory</h3>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Member</th>
+                                        <th>Status</th>
+                                        <th>Earnings</th>
+                                        <th>Referrals</th>
+                                        <th>Join Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="flex items-center">
+                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Rajesh Kumar" class="w-10 h-10 rounded-full object-cover mr-3" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                                <div>
+                                                    <div class="font-medium text-text-primary">Rajesh Kumar</div>
+                                                    <div class="text-sm text-text-secondary">rajesh@email.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td class="font-mono text-text-primary">₹2,45,000</td>
+                                        <td class="text-text-primary">23</td>
+                                        <td class="text-text-secondary">Jan 15, 2025</td>
+                                        <td>
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary hover:text-primary-700 text-sm">View</button>
+                                                <button class="text-accent hover:text-accent-700 text-sm">Edit</button>
+                                                <button class="text-error hover:text-red-700 text-sm">Suspend</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="flex items-center">
+                                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Priya Sharma" class="w-10 h-10 rounded-full object-cover mr-3" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                                <div>
+                                                    <div class="font-medium text-text-primary">Priya Sharma</div>
+                                                    <div class="text-sm text-text-secondary">priya@email.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-warning-100 text-warning">
+                                                Pending
+                                            </span>
+                                        </td>
+                                        <td class="font-mono text-text-primary">₹4,67,800</td>
+                                        <td class="text-text-primary">45</td>
+                                        <td class="text-text-secondary">Sep 12, 2025</td>
+                                        <td>
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary hover:text-primary-700 text-sm">View</button>
+                                                <button class="text-accent hover:text-accent-700 text-sm">Verify</button>
+                                                <button class="text-error hover:text-red-700 text-sm">Reject</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="flex items-center">
+                                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Amit Patel" class="w-10 h-10 rounded-full object-cover mr-3" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                                <div>
+                                                    <div class="font-medium text-text-primary">Amit Patel</div>
+                                                    <div class="text-sm text-text-secondary">amit@email.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td class="font-mono text-text-primary">₹1,89,500</td>
+                                        <td class="text-text-primary">18</td>
+                                        <td class="text-text-secondary">Mar 8, 2025</td>
+                                        <td>
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary hover:text-primary-700 text-sm">View</button>
+                                                <button class="text-accent hover:text-accent-700 text-sm">Edit</button>
+                                                <button class="text-error hover:text-red-700 text-sm">Suspend</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="px-6 py-4 border-t border-border">
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm text-text-secondary">
+                                    Showing 1 to 3 of 12,847 members
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1 text-sm border border-border rounded hover:bg-surface transition-colors">Previous</button>
+                                    <button class="px-3 py-1 text-sm bg-primary text-white rounded">1</button>
+                                    <button class="px-3 py-1 text-sm border border-border rounded hover:bg-surface transition-colors">2</button>
+                                    <button class="px-3 py-1 text-sm border border-border rounded hover:bg-surface transition-colors">3</button>
+                                    <button class="px-3 py-1 text-sm border border-border rounded hover:bg-surface transition-colors">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pool Management Section -->
+                <div id="pools-section" class="section-content hidden">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-text-primary">Pool Management</h2>
+                        <p class="text-text-secondary mt-2">Manage global pool distributions and payout processing</p>
+                    </div>
+
+                    <!-- Pool Overview -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Current Pool</h3>
+                            <div class="text-3xl font-bold text-primary mb-2">₹15,67,890</div>
+                            <div class="text-sm text-text-secondary mb-4">Ready for distribution</div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Eligible Members</span>
+                                    <span class="text-text-primary font-medium">8,234</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Next Distribution</span>
+                                    <span class="text-text-primary font-medium">2d 14h 32m</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Distribution History</h3>
+                            <div class="text-3xl font-bold text-accent mb-2">₹2,45,67,890</div>
+                            <div class="text-sm text-text-secondary mb-4">Total distributed</div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Last Distribution</span>
+                                    <span class="text-text-primary font-medium">₹12,45,000</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Date</span>
+                                    <span class="text-text-primary font-medium">Sep 13, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Pending Payouts</h3>
+                            <div class="text-3xl font-bold text-secondary mb-2">₹4,23,560</div>
+                            <div class="text-sm text-text-secondary mb-4">234 members waiting</div>
+                            <button class="btn-primary w-full">Process Payouts</button>
+                        </div>
+                    </div>
+
+                    <!-- Distribution Controls -->
+                    <div class="bg-white rounded-lg p-6 shadow-soft border border-border mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Distribution Controls</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Distribution Type</label>
+                                <select class="input-field">
+                                    <option>Automatic (Scheduled)</option>
+                                    <option>Manual Distribution</option>
+                                    <option>Emergency Distribution</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Minimum Pool Amount</label>
+                                <input type="text" value="₹10,00,000" class="input-field" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Distribution Percentage</label>
+                                <input type="text" value="80%" class="input-field" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Reserve Percentage</label>
+                                <input type="text" value="20%" class="input-field" />
+                            </div>
+                        </div>
+                        <div class="mt-6 flex space-x-4">
+                            <button class="btn-primary">Save Settings</button>
+                            <button class="btn-accent">Manual Distribution</button>
+                            <button class="bg-surface text-text-primary px-6 py-3 rounded-lg font-semibold hover:bg-surface-100 transition-colors">View Audit Trail</button>
+                        </div>
+                    </div>
+
+                    <!-- Recent Distributions -->
+                    <div class="bg-white rounded-lg shadow-soft border border-border overflow-hidden">
+                        <div class="px-6 py-4 border-b border-border">
+                            <h3 class="text-lg font-semibold text-text-primary">Recent Distributions</h3>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Recipients</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-text-primary">Sep 13, 2025</td>
+                                        <td class="font-mono text-text-primary">₹12,45,000</td>
+                                        <td class="text-text-primary">7,892 members</td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success">
+                                                Completed
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="text-primary hover:text-primary-700 text-sm">View Details</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-text-primary">Sep 10, 2025</td>
+                                        <td class="font-mono text-text-primary">₹9,87,500</td>
+                                        <td class="text-text-primary">6,543 members</td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success">
+                                                Completed
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="text-primary hover:text-primary-700 text-sm">View Details</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Section -->
+                <div id="analytics-section" class="section-content hidden">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-text-primary">Analytics Dashboard</h2>
+                        <p class="text-text-secondary mt-2">Growth trends, engagement metrics, and performance insights</p>
+                    </div>
+
+                    <!-- Key Metrics -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border text-center">
+                            <div class="text-2xl font-bold text-primary mb-2">89.2%</div>
+                            <div class="text-sm text-text-secondary">Member Retention</div>
+                            <div class="text-xs text-success mt-1">↗ +2.3% vs last month</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border text-center">
+                            <div class="text-2xl font-bold text-accent mb-2">₹1,23,450</div>
+                            <div class="text-sm text-text-secondary">Avg Daily Revenue</div>
+                            <div class="text-xs text-success mt-1">↗ +15.7% vs last month</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border text-center">
+                            <div class="text-2xl font-bold text-secondary mb-2">3.2x</div>
+                            <div class="text-sm text-text-secondary">Referral Multiplier</div>
+                            <div class="text-xs text-success mt-1">↗ +0.4x vs last month</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border text-center">
+                            <div class="text-2xl font-bold text-text-primary mb-2">94.7%</div>
+                            <div class="text-sm text-text-secondary">Payout Success Rate</div>
+                            <div class="text-xs text-success mt-1">↗ +1.2% vs last month</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Member Growth</h3>
+                            <div class="h-64 flex items-center justify-center bg-surface rounded-lg">
+                                <svg class="w-full h-full" viewBox="0 0 400 200">
+                                    <defs>
+                                        <linearGradient id="growthGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#059669;stop-opacity:0.3"/>
+                                            <stop offset="100%" style="stop-color:#059669;stop-opacity:0"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <polyline fill="none" stroke="#059669" stroke-width="3" points="20,160 80,140 140,120 200,100 260,80 320,60 380,40"/>
+                                    <polyline fill="url(#growthGradient)" points="20,160 80,140 140,120 200,100 260,80 320,60 380,40 380,180 20,180"/>
+                                    <text x="200" y="195" text-anchor="middle" class="text-xs fill-current text-text-secondary">Member Growth Trend</text>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Revenue Distribution</h3>
+                            <div class="h-64 flex items-center justify-center bg-surface rounded-lg">
+                                <svg class="w-full h-full" viewBox="0 0 200 200">
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="#e5e7eb" stroke-width="20"/>
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="#059669" stroke-width="20" stroke-dasharray="251.2" stroke-dashoffset="62.8" transform="rotate(-90 100 100)"/>
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="#d97706" stroke-width="20" stroke-dasharray="251.2" stroke-dashoffset="125.6" transform="rotate(90 100 100)"/>
+                                    <text x="100" y="105" text-anchor="middle" class="text-lg font-bold fill-current text-text-primary">75%</text>
+                                    <text x="100" y="120" text-anchor="middle" class="text-xs fill-current text-text-secondary">Pool Distribution</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Table -->
+                    <div class="bg-white rounded-lg shadow-soft border border-border overflow-hidden">
+                        <div class="px-6 py-4 border-b border-border">
+                            <h3 class="text-lg font-semibold text-text-primary">Top Performers</h3>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Member</th>
+                                        <th>Earnings</th>
+                                        <th>Referrals</th>
+                                        <th>Growth Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="flex items-center">
+                                                <div class="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="flex items-center">
+                                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face" alt="Priya Sharma" class="w-8 h-8 rounded-full object-cover mr-3" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                                <span class="font-medium text-text-primary">Priya Sharma</span>
+                                            </div>
+                                        </td>
+                                        <td class="font-mono text-text-primary">₹4,67,800</td>
+                                        <td class="text-text-primary">45</td>
+                                        <td class="text-success">+23.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="flex items-center">
+                                                <div class="w-6 h-6 bg-text-secondary rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="flex items-center">
+                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face" alt="Rajesh Kumar" class="w-8 h-8 rounded-full object-cover mr-3" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                                <span class="font-medium text-text-primary">Rajesh Kumar</span>
+                                            </div>
+                                        </td>
+                                        <td class="font-mono text-text-primary">₹2,45,000</td>
+                                        <td class="text-text-primary">23</td>
+                                        <td class="text-success">+18.2%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Section -->
+                <div id="notifications-section" class="section-content hidden">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-text-primary">Notification Center</h2>
+                        <p class="text-text-secondary mt-2">Send targeted communications to member segments</p>
+                    </div>
+
+                    <!-- Notification Composer -->
+                    <div class="bg-white rounded-lg p-6 shadow-soft border border-border mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Create Notification</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Recipient Group</label>
+                                <select class="input-field">
+                                    <option>All Members</option>
+                                    <option>Active Members</option>
+                                    <option>New Members (Last 30 days)</option>
+                                    <option>High Performers</option>
+                                    <option>Pending Verification</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Notification Type</label>
+                                <select class="input-field">
+                                    <option>Announcement</option>
+                                    <option>Promotion</option>
+                                    <option>System Update</option>
+                                    <option>Payment Alert</option>
+                                    <option>Achievement</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-text-secondary mb-2">Subject</label>
+                            <input type="text" placeholder="Enter notification subject" class="input-field" />
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-text-secondary mb-2">Message</label>
+                            <textarea rows="4" placeholder="Enter your message here..." class="input-field"></textarea>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="btn-primary">Send Now</button>
+                            <button class="btn-secondary">Schedule</button>
+                            <button class="bg-surface text-text-primary px-6 py-3 rounded-lg font-semibold hover:bg-surface-100 transition-colors">Save Draft</button>
+                        </div>
+                    </div>
+
+                    <!-- Recent Notifications -->
+                    <div class="bg-white rounded-lg shadow-soft border border-border overflow-hidden">
+                        <div class="px-6 py-4 border-b border-border">
+                            <h3 class="text-lg font-semibold text-text-primary">Recent Notifications</h3>
+                        </div>
+                        <div class="divide-y divide-border">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-text-primary">Pool Distribution Complete</h4>
+                                        <p class="text-sm text-text-secondary mt-1">₹12,45,000 has been distributed to 7,892 eligible members.</p>
+                                        <div class="flex items-center mt-2 text-xs text-text-tertiary">
+                                            <span>Sent to: All Members</span>
+                                            <span class="mx-2">•</span>
+                                            <span>Sep 13, 2025 at 2:30 PM</span>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success">
+                                        Delivered
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-text-primary">New Reward Added</h4>
+                                        <p class="text-sm text-text-secondary mt-1">iPhone 15 Pro Max now available in rewards catalog!</p>
+                                        <div class="flex items-center mt-2 text-xs text-text-tertiary">
+                                            <span>Sent to: Active Members</span>
+                                            <span class="mx-2">•</span>
+                                            <span>Sep 12, 2025 at 10:15 AM</span>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success">
+                                        Delivered
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Section -->
+                <div id="compliance-section" class="section-content hidden">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-text-primary">Compliance Monitoring</h2>
+                        <p class="text-text-secondary mt-2">Regulatory reporting, audit logs, and risk assessment</p>
+                    </div>
+
+                    <!-- Compliance Status -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">RBI Compliance</h3>
+                                <div class="w-3 h-3 bg-success rounded-full"></div>
+                            </div>
+                            <div class="text-sm text-text-secondary mb-2">Status: Compliant</div>
+                            <div class="text-xs text-text-tertiary">Last audit: Aug 15, 2025</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">Data Protection</h3>
+                                <div class="w-3 h-3 bg-success rounded-full"></div>
+                            </div>
+                            <div class="text-sm text-text-secondary mb-2">Status: Secure</div>
+                            <div class="text-xs text-text-tertiary">Last review: Sep 10, 2025</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">Financial Reporting</h3>
+                                <div class="w-3 h-3 bg-warning rounded-full"></div>
+                            </div>
+                            <div class="text-sm text-text-secondary mb-2">Status: Pending Review</div>
+                            <div class="text-xs text-text-tertiary">Due: Sep 20, 2025</div>
+                        </div>
+                    </div>
+
+                    <!-- Audit Logs -->
+                    <div class="bg-white rounded-lg shadow-soft border border-border overflow-hidden">
+                        <div class="px-6 py-4 border-b border-border">
+                            <h3 class="text-lg font-semibold text-text-primary">Audit Trail</h3>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Action</th>
+                                        <th>User</th>
+                                        <th>Details</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-text-secondary">Sep 15, 2025 7:42 PM</td>
+                                        <td class="text-text-primary">Pool Distribution</td>
+                                        <td class="text-text-primary">System</td>
+                                        <td class="text-text-secondary">₹12,45,000 distributed</td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success">
+                                                Success
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-text-secondary">Sep 15, 2025 3:15 PM</td>
+                                        <td class="text-text-primary">Member Verification</td>
+                                        <td class="text-text-primary">Admin</td>
+                                        <td class="text-text-secondary">Priya Sharma verified</td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success">
+                                                Success
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Section -->
+                <div id="support-section" class="section-content hidden">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-text-primary">Support Center</h2>
+                        <p class="text-text-secondary mt-2">Member inquiries, response tracking, and escalation management</p>
+                    </div>
+
+                    <!-- Support Stats -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border text-center">
+                            <div class="text-2xl font-bold text-primary mb-2">23</div>
+                            <div class="text-sm text-text-secondary">Open Tickets</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border text-center">
+                            <div class="text-2xl font-bold text-accent mb-2">156</div>
+                            <div class="text-sm text-text-secondary">Resolved Today</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border text-center">
+                            <div class="text-2xl font-bold text-secondary mb-2">2.3h</div>
+                            <div class="text-sm text-text-secondary">Avg Response Time</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-soft border border-border text-center">
+                            <div class="text-2xl font-bold text-success mb-2">94.7%</div>
+                            <div class="text-sm text-text-secondary">Satisfaction Rate</div>
+                        </div>
+                    </div>
+
+                    <!-- Support Tickets -->
+                    <div class="bg-white rounded-lg shadow-soft border border-border overflow-hidden">
+                        <div class="px-6 py-4 border-b border-border">
+                            <h3 class="text-lg font-semibold text-text-primary">Recent Support Tickets</h3>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket ID</th>
+                                        <th>Member</th>
+                                        <th>Subject</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Created</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-mono text-text-primary">#12847</td>
+                                        <td class="text-text-primary">Rajesh Kumar</td>
+                                        <td class="text-text-primary">Payment not received</td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-error-100 text-error">
+                                                High
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-warning-100 text-warning">
+                                                In Progress
+                                            </span>
+                                        </td>
+                                        <td class="text-text-secondary">2 hours ago</td>
+                                        <td>
+                                            <button class="text-primary hover:text-primary-700 text-sm">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-mono text-text-primary">#12846</td>
+                                        <td class="text-text-primary">Priya Sharma</td>
+                                        <td class="text-text-primary">Account verification</td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-warning-100 text-warning">
+                                                Medium
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success">
+                                                Resolved
+                                            </span>
+                                        </td>
+                                        <td class="text-text-secondary">4 hours ago</td>
+                                        <td>
+                                            <button class="text-primary hover:text-primary-700 text-sm">View</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-text-primary text-white py-12 lg:pl-64">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-gray-400">
+                <p>&copy; 2025 Green Grow Private Limited. All Rights Reserved.</p>
+                <p class="mt-2 text-sm">Admin Portal - Secure Management Interface</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Notification toggle
+        function toggleNotifications() {
+            // Placeholder for notification dropdown
+            console.log('Toggle notifications');
+        }
+
+        // Section navigation
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(sectionName + '-section');
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+
+            // Update sidebar navigation
+            const navLinks = document.querySelectorAll('aside nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('bg-primary-50', 'text-primary');
+                link.classList.add('text-text-secondary', 'hover:bg-surface', 'hover:text-text-primary');
+            });
+
+            // Highlight active nav item
+            const activeLink = document.querySelector(`aside nav a[href="#${sectionName}"]`);
+            if (activeLink) {
+                activeLink.classList.add('bg-primary-50', 'text-primary');
+                activeLink.classList.remove('text-text-secondary', 'hover:bg-surface', 'hover:text-text-primary');
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show overview section by default
+            showSection('overview');
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
